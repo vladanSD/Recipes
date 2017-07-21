@@ -35,10 +35,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     public void setListOfRecipes(List<RecipeModel> listOfRecipes) {
         this.listOfRecipes = listOfRecipes;
+        notifyDataSetChanged();
     }
 
     @Override
     public void onItemDismiss(int position) {
+
+        notifyItemRemoved(position);
         listener.onSwiped(position);
     }
 
