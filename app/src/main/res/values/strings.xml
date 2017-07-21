@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Recipes</string>
+    <string name="favorites">Favorites</string>
+    <string name="new_recipes">New recipes!</string>
+
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>

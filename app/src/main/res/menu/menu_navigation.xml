@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/new_recipes"
+            android:title="@string/new_recipes"/>
+            <!--android:icon="@drawable/favorites"-->
+
+
+        <item
+            android:id="@+id/favourite_recipes"
+            android:title="@string/favorites"/>
+            <!--android:icon="@drawable/ic_home"-->
+
+
+
+
+    </group>
+
+    <item android:title="Category">
+        <menu>
+            <item
+                android:id="@+id/firstCategory"
+                android:title="First Category"/>
+                <!--android:icon="@drawable/ic_setting" -->
+            <item
+                android:id="@+id/secondCategory"
+                android:title="Second Category"/>
+                <!--android:icon="@drawable/ic_setting"-->
+            <item
+                android:id="@+id/thirdCategory"
+                android:title="Third Category"/>
+                <!--android:icon="@drawable/ic_setting"-->
+        </menu>
+
+    </item>
+
+</menu>
