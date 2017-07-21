@@ -3,9 +3,7 @@ package com.vladan.recipes.db.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-/**
- * Created by Vladan on 7/21/2017.
- */
+
 
 @Entity
 public class RecipeModel {
@@ -23,9 +21,11 @@ public class RecipeModel {
 
     private String recipeCategory;
 
+    private String recipeText;
+
     private String recipeAuthor;
 
-    public RecipeModel(int recipeId, int recipeNew, int favouriteRecipes, String recipeName, String recipeImg, String recipeCategory, String recipeAuthor) {
+    public RecipeModel(int recipeId, int recipeNew, int favouriteRecipes, String recipeName, String recipeImg, String recipeCategory,String recipeText, String recipeAuthor) {
         this.recipeId = recipeId;
         this.recipeNew = recipeNew;
         this.favouriteRecipes = favouriteRecipes;
@@ -33,6 +33,7 @@ public class RecipeModel {
         this.recipeImg = recipeImg;
         this.recipeCategory = recipeCategory;
         this.recipeAuthor = recipeAuthor;
+        this.recipeText = recipeText;
     }
 
     public int getRecipeId() {
@@ -89,5 +90,13 @@ public class RecipeModel {
 
     public void setRecipeAuthor(String recipeAuthor) {
         this.recipeAuthor = recipeAuthor;
+    }
+
+    public String getRecipeText() {
+        return recipeText;
+    }
+
+    public void setRecipeText(String recipeText) {
+        this.recipeText = recipeText;
     }
 }

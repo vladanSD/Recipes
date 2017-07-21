@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void initNavigationDrawer(){
 
-        mToolbar =  findViewById(R.id.toolbar);
-        navigationView =  findViewById(R.id.navigation_view);
-        mDrawerLayout =  findViewById(R.id.drawer);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
 
         setSupportActionBar(mToolbar);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.global_color_control_highlight));
+       // mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.global_color_control_highlight));
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close){
             @Override
