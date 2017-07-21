@@ -29,6 +29,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         this.listener = listener;
     }
 
+    public List<RecipeModel> getListOfRecipes() {
+        return listOfRecipes;
+    }
+
+    public void setListOfRecipes(List<RecipeModel> listOfRecipes) {
+        this.listOfRecipes = listOfRecipes;
+    }
+
     @Override
     public void onItemDismiss(int position) {
         listener.onSwiped(position);

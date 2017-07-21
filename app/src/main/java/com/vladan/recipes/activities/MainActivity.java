@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.vladan.recipes.R;
+import com.vladan.recipes.fragments.ListOfRecipesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     Toolbar mToolbar;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
+    ListOfRecipesFragment fragmet;
 
 
     @Override
@@ -47,9 +49,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (id){
                     case R.id.new_recipes:
                         mDrawerLayout.closeDrawers();
+                        fragmet = ListOfRecipesFragment.newInstance(0);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, fragmet).commit();
                         break;
                     case R.id.favourite_recipes:
                         mDrawerLayout.closeDrawers();
+                        fragmet = ListOfRecipesFragment.newInstance(1);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, fragmet).commit();
                         break;
                     case R.id.firstCategory:
                         mDrawerLayout.closeDrawers();

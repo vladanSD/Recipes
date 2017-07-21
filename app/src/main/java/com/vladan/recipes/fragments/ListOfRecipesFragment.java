@@ -1,27 +1,34 @@
 package com.vladan.recipes.fragments;
 
 import android.arch.lifecycle.LifecycleFragment;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.vladan.recipes.R;
+import com.vladan.recipes.ViewModels.RecipeModelViewModel;
 import com.vladan.recipes.adapters.RecipeAdapter;
 import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.utils.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAdapter.OnClickedAndSwipedInterface {
 
     //version of fragment
     private int fragment = -1;
+    private static final int NEW_RECIPES = 0;
+    private static final int FAVOURITES = 1;
 
     private static final String STATE = "key";
 
@@ -29,6 +36,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     private RecipeAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
+    private RecipeModelViewModel viewModel;
 
 
     public static ListOfRecipesFragment newInstance(int i) {
@@ -73,6 +81,8 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
             Parcelable state = savedInstanceState.getParcelable(STATE);
             mLayoutManager.onRestoreInstanceState(state);
         }
+        //getting data
+        initData();
     }
 
     @Override
@@ -94,5 +104,56 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
     }
 
+    private void observeNew(){
+        viewModel.getNewList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+            @Override
+            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
+                mAdapter.setListOfRecipes(recipeModels);
+            }
+        });
+    }
+
+    private void observeFav(){
+        viewModel.getFavList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+            @Override
+            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
+                mAdapter.setListOfRecipes(recipeModels);
+            }
+        });
+    }
+
+    private void initData(){
+        viewModel = ViewModelProviders.of(this).get(RecipeModelViewModel.class);
+
+//        if(fragment==FAVOURITES){
+//            observeFav();
+//            swipeSetupAnimation();
+//            getActivity().setTitle("Favourites");
+//        }else if(fragment==NEW_RECIPES){
+//            observeNew();
+//            getActivity().setTitle("All heroes");
+//        }
+
+
+
+        switch(fragment){
+            case NEW_RECIPES:
+                observeNew();
+                getActivity().setTitle("New recipes!");
+                break;
+            case FAVOURITES:
+                observeFav();
+                swipeSetupAnimation();
+                getActivity().setTitle("Favourites");
+                break;
+
+        }
+    }
+
+    public void swipeSetupAnimation(){
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+    }
 
 }
