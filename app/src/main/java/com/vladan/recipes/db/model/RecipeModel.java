@@ -3,10 +3,11 @@ package com.vladan.recipes.db.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
 
 
 @Entity
-public class RecipeModel {
+public class RecipeModel implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
     private int recipeId;

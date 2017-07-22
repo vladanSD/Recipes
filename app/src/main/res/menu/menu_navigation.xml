@@ -4,14 +4,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/new_recipes"
-            android:title="@string/new_recipes"/>
-            <!--android:icon="@drawable/favorites"-->
+            android:title="@string/new_recipes"
+            android:icon="@drawable/new_recipes"/>
 
 
         <item
             android:id="@+id/favourite_recipes"
-            android:title="@string/favorites"/>
-            <!--android:icon="@drawable/ic_home"-->
+            android:title="@string/favorites"
+            android:icon="@drawable/favorites"/>
 
 
     </group>

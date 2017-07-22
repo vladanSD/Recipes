@@ -3,19 +3,20 @@ package com.vladan.recipes.fragments;
 import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.vladan.recipes.R;
 import com.vladan.recipes.ViewModels.RecipeModelViewModel;
+import com.vladan.recipes.activities.DetailRecipeActivity;
 import com.vladan.recipes.adapters.RecipeAdapter;
 import com.vladan.recipes.db.model.RecipeModel;
 import com.vladan.recipes.utils.ItemTouchHelperCallback;
@@ -37,7 +38,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     private View mRootView;
     private RecipeAdapter mAdapter;
     private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager mLayoutManager;
     private RecipeModelViewModel viewModel;
 
 
@@ -67,7 +68,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
 
     public void setRecyclerView(){
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new GridLayoutManager(getActivity(),2);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler);
         mAdapter = new RecipeAdapter(new ArrayList<RecipeModel>(), getContext(), this);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -98,14 +99,18 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
     @Override
     public void onItemClicked(int index) {
-
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("recipe", mAdapter.getListOfRecipes().get(index));
+        Intent i = new Intent(getActivity(), DetailRecipeActivity.class);
+        i.putExtras(bundle);
+        startActivity(i);
     }
 
     @Override
     public void onSwiped(int index) {
         RecipeModel recipe = mAdapter.getListOfRecipes().get(index);
         recipe.setFavouriteRecipes(0);
-        viewModel.addRecipe(recipe);
+        viewModel.removeFromFavourites(recipe);
     }
 
 
@@ -121,7 +126,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
                 break;
             case FAVOURITES:
                 observeFav();
-                swipeSetupAnimation();
+//                swipeSetupAnimation();
                 getActivity().setTitle("Favourites");
                 break;
 

@@ -84,7 +84,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         }
 
         void bind(String name, String image){
-            Picasso.with(context).load(image).resize(120, 60).into(thumbnailOfRecipe);
+            Picasso.with(context).load(image).into(thumbnailOfRecipe);
             nameOfRecipe.setText(name);
         }
 

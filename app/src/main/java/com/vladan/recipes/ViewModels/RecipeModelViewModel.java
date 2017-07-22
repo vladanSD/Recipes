@@ -19,7 +19,7 @@ public class RecipeModelViewModel extends AndroidViewModel {
 
 
 
-    //constr
+    //const
     public RecipeModelViewModel(Application application) {
         super(application);
 
@@ -44,7 +44,8 @@ public class RecipeModelViewModel extends AndroidViewModel {
         new AddListOfRecipes(appDatabase).execute(list);
     }
 
-    public void addRecipe(RecipeModel recipe){new AddSingleAsyncTask(appDatabase).execute(recipe);}
+    //removing from favourites
+    public void removeFromFavourites(RecipeModel recipe){new AddSingleAsyncTask(appDatabase).execute(recipe);}
 
 
 
