@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.vladan.recipes.utils.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAdapter.OnClickedAndSwipedInterface {
@@ -101,40 +103,16 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
     @Override
     public void onSwiped(int index) {
-
+        RecipeModel recipe = mAdapter.getListOfRecipes().get(index);
+        recipe.setFavouriteRecipes(0);
+        viewModel.addRecipe(recipe);
     }
 
-    private void observeNew(){
-        viewModel.getNewList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
-            @Override
-            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
-                mAdapter.setListOfRecipes(recipeModels);
-            }
-        });
-    }
 
-    private void observeFav(){
-        viewModel.getFavList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
-            @Override
-            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
-                mAdapter.setListOfRecipes(recipeModels);
-            }
-        });
-    }
 
     private void initData(){
+
         viewModel = ViewModelProviders.of(this).get(RecipeModelViewModel.class);
-
-//        if(fragment==FAVOURITES){
-//            observeFav();
-//            swipeSetupAnimation();
-//            getActivity().setTitle("Favourites");
-//        }else if(fragment==NEW_RECIPES){
-//            observeNew();
-//            getActivity().setTitle("All heroes");
-//        }
-
-
 
         switch(fragment){
             case NEW_RECIPES:
@@ -148,6 +126,24 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
                 break;
 
         }
+    }
+
+    private void observeNew(){
+        viewModel.getNewList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+            @Override
+            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
+                    mAdapter.setListOfRecipes(recipeModels);
+            }
+        });
+    }
+
+    private void observeFav(){
+        viewModel.getFavList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+            @Override
+            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
+                mAdapter.setListOfRecipes(recipeModels);
+            }
+        });
     }
 
     public void swipeSetupAnimation(){

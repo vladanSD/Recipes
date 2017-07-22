@@ -19,7 +19,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager) {
              int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-             int swipeFlags = 500;
+             int swipeFlags = 0;
             return makeMovementFlags(dragFlags, swipeFlags);
         } else {
             //单列的RecyclerView支持上下拖动和左右侧滑
@@ -43,7 +43,7 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public boolean isLongPressDragEnabled() {
-        return false;
+        return true;
     }
 
     @Override

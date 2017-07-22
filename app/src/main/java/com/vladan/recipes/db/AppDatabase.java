@@ -1,7 +1,6 @@
 package com.vladan.recipes.db;
 
 import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
@@ -9,9 +8,8 @@ import android.content.Context;
 import com.vladan.recipes.db.dao.RecipeModelDao;
 import com.vladan.recipes.db.model.RecipeModel;
 
-/**
- * Created by Vladan on 7/21/2017.
- */
+
+
 @Database(entities = {RecipeModel.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -21,7 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
     //singleton
     public static AppDatabase getInstance(Context context){
         if( instance == null) {
-            instance = Room.databaseBuilder(context, AppDatabase.class, "recipes_db")
+            instance = Room.databaseBuilder(context, AppDatabase.class, "db_recipes")
                     .build();
         } return instance;
     }

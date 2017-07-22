@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,10 +17,12 @@ import com.vladan.recipes.fragments.ListOfRecipesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String ACTIVE_FRAGMENT = "active";
+
     Toolbar mToolbar;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
-    ListOfRecipesFragment fragmet;
+    ListOfRecipesFragment activeFragment;
 
 
     @Override
@@ -27,10 +30,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initNavigationDrawer();
+
+        //restoring fragment instance
+        if(savedInstanceState != null ){
+            Log.i("State", "restored");
+            activeFragment = (ListOfRecipesFragment) getSupportFragmentManager().getFragment(savedInstanceState, ACTIVE_FRAGMENT);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
+        } else {
+            Log.i("State", "no state found, initialaling fragment");
+            navigationView.getMenu().getItem(0).setChecked(true);
+            activeFragment = ListOfRecipesFragment.newInstance(0);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
+        }
     }
 
 
 
+
+
+
+
+    //setting up drawer
     public void initNavigationDrawer(){
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -49,13 +69,13 @@ public class MainActivity extends AppCompatActivity {
                 switch (id){
                     case R.id.new_recipes:
                         mDrawerLayout.closeDrawers();
-                        fragmet = ListOfRecipesFragment.newInstance(0);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, fragmet).commit();
+                        activeFragment = ListOfRecipesFragment.newInstance(0);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.favourite_recipes:
                         mDrawerLayout.closeDrawers();
-                        fragmet = ListOfRecipesFragment.newInstance(1);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, fragmet).commit();
+                        activeFragment = ListOfRecipesFragment.newInstance(1);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.firstCategory:
                         mDrawerLayout.closeDrawers();
@@ -66,13 +86,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.thirdCategory:
                         mDrawerLayout.closeDrawers();
                         break;
+                    case R.id.init_data:
+                        mDrawerLayout.closeDrawers();
+                        startActivity(new Intent(MainActivity.this, AddDataActivity.class));
+                        break;
 
                 }
                 return true;
             }
         });
-
-       // mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.global_color_control_highlight));
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close){
             @Override
@@ -89,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState,ACTIVE_FRAGMENT, activeFragment );
     }
 }
 
