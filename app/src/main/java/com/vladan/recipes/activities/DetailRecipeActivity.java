@@ -46,7 +46,7 @@ public class DetailRecipeActivity extends AppCompatActivity {
         mScrollingImage = (ImageView) findViewById(R.id.image_scrolling);
         textView = (TextView) findViewById(R.id.tv_scrolling);
         Picasso.with(getApplicationContext()).load(recipeModel.getRecipeImg()).into(mScrollingImage);
-        textView.setText(recipeModel.getRecipeName());
+//        textView.setText(recipeModel.getRecipeName());
         mFab = (FloatingActionButton) findViewById(R.id.fab_scrolling);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="app_bar_height_image_view">180dp</dimen>
+    <dimen name="big_activity_margin_horizontal">72dp</dimen>
+    <dimen name="big_activity_fab_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="big_activity_text_margin">16dp</dimen>
+</resources>
