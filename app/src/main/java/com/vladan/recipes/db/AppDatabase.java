@@ -19,7 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
     //singleton
     public static AppDatabase getInstance(Context context){
         if( instance == null) {
-            instance = Room.databaseBuilder(context, AppDatabase.class, "db_recipes")
+            instance = Room.databaseBuilder(context, AppDatabase.class, "database_recipes")
                     .build();
         } return instance;
     }

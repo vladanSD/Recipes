@@ -20,13 +20,13 @@ public class RecipeModel implements Serializable {
 
     private String recipeImg;
 
-    private String recipeCategory;
+    private int recipeCategory;
 
     private String recipeText;
 
     private String recipeAuthor;
 
-    public RecipeModel(int recipeId, int recipeNew, int favouriteRecipes, String recipeName, String recipeImg, String recipeCategory,String recipeText, String recipeAuthor) {
+    public RecipeModel(int recipeId, int recipeNew, int favouriteRecipes, String recipeName, String recipeImg, int recipeCategory,String recipeText, String recipeAuthor) {
         this.recipeId = recipeId;
         this.recipeNew = recipeNew;
         this.favouriteRecipes = favouriteRecipes;
@@ -77,11 +77,11 @@ public class RecipeModel implements Serializable {
         this.recipeImg = recipeImg;
     }
 
-    public String getRecipeCategory() {
+    public int getRecipeCategory() {
         return recipeCategory;
     }
 
-    public void setRecipeCategory(String recipeCategory) {
+    public void setRecipeCategory(int recipeCategory) {
         this.recipeCategory = recipeCategory;
     }
 

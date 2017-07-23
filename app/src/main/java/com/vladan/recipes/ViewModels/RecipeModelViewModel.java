@@ -15,8 +15,6 @@ public class RecipeModelViewModel extends AndroidViewModel {
 
     private AppDatabase appDatabase;
     private LiveData<List<RecipeModel>> mNewList;
-    private LiveData<List<RecipeModel>> mFavList;
-
 
 
     //const
@@ -25,18 +23,13 @@ public class RecipeModelViewModel extends AndroidViewModel {
 
         appDatabase = AppDatabase.getInstance(this.getApplication());
         mNewList = appDatabase.getRecipeModelDao().getNewRecipes();
-        mFavList = appDatabase.getRecipeModelDao().getFavouriteRecipes();
+
     }
 
 
     //getting list of new items
     public LiveData<List<RecipeModel>> getNewList(){
         return mNewList;
-    }
-
-    //getting list of favourite items
-    public LiveData<List<RecipeModel>> getFavList(){
-        return mFavList;
     }
 
     //adding inital data into db

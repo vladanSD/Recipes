@@ -20,16 +20,21 @@
         <menu>
             <item
                 android:id="@+id/firstCategory"
-                android:title="First Category"/>
-                <!--android:icon="@drawable/ic_setting" -->
+                android:title="First Category"
+                android:icon="@drawable/food"/>
             <item
                 android:id="@+id/secondCategory"
-                android:title="Second Category"/>
-                <!--android:icon="@drawable/ic_setting"-->
+                android:title="Second Category"
+                android:icon="@drawable/food"/>
             <item
                 android:id="@+id/thirdCategory"
-                android:title="Third Category"/>
-                <!--android:icon="@drawable/ic_setting"-->
+                android:title="Third Category"
+                android:icon="@drawable/food"/>
+            <item
+                android:id="@+id/forthCategory"
+                android:title="Third Category"
+            android:icon="@drawable/food"/>
+
         </menu>
 
     </item>

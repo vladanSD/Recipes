@@ -5,6 +5,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.vladan.recipes.db.model.RecipeModel;
 
@@ -26,7 +27,7 @@ public interface RecipeModelDao {
 
     //return recipes by category
     @Query("select * from RecipeModel where recipeCategory =:category")
-    LiveData<List<RecipeModel>> getRecipeByCategory(String category);
+    LiveData<List<RecipeModel>> getRecipeByCategory(int category);
 
     //for trivial adding data
     @Insert (onConflict = REPLACE)
@@ -34,4 +35,7 @@ public interface RecipeModelDao {
 
     @Insert (onConflict = REPLACE)
     void addRecipe(RecipeModel recipeModel);
+
+    @Update
+    void updateRecipe(RecipeModel recipeModel);
 }

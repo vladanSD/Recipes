@@ -79,12 +79,23 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.firstCategory:
                         mDrawerLayout.closeDrawers();
+                        activeFragment = ListOfRecipesFragment.newInstance(11);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.secondCategory:
                         mDrawerLayout.closeDrawers();
+                        activeFragment = ListOfRecipesFragment.newInstance(12);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.thirdCategory:
                         mDrawerLayout.closeDrawers();
+                        activeFragment = ListOfRecipesFragment.newInstance(13);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
+                        break;
+                    case R.id.forthCategory:
+                        mDrawerLayout.closeDrawers();
+                        activeFragment = ListOfRecipesFragment.newInstance(14);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.init_data:
                         mDrawerLayout.closeDrawers();
