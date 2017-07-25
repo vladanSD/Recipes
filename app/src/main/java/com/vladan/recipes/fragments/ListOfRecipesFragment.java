@@ -15,13 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vladan.recipes.R;
-import com.vladan.recipes.ViewModels.FavouritesViewModel;
-import com.vladan.recipes.ViewModels.FirstCategoryViewModel;
-import com.vladan.recipes.ViewModels.ForthCategoryViewModel;
 import com.vladan.recipes.ViewModels.RecipeModelViewModel;
-import com.vladan.recipes.ViewModels.SecondCategoryViewModel;
-import com.vladan.recipes.ViewModels.SetFavouriteRecipeViewModel;
-import com.vladan.recipes.ViewModels.ThirdCategoryViewModel;
 import com.vladan.recipes.activities.DetailRecipeActivity;
 import com.vladan.recipes.adapters.RecipeAdapter;
 import com.vladan.recipes.db.model.RecipeModel;
@@ -50,11 +44,6 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecipeModelViewModel recipeModelViewModel;
-    private FavouritesViewModel favouritesViewModel;
-    private FirstCategoryViewModel firstCategoryViewModel;
-    private SecondCategoryViewModel secondCategoryViewModel;
-    private ThirdCategoryViewModel thirdCategoryViewModel;
-    private ForthCategoryViewModel forthCategoryViewModel;
 
 
     public static ListOfRecipesFragment newInstance(int i) {
@@ -132,7 +121,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
     private void initData(){
 
-
+        recipeModelViewModel = ViewModelProviders.of(this).get(RecipeModelViewModel.class);
 
         switch(fragment){
             case NEW_RECIPES:
@@ -165,7 +154,6 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observeNew(){
-        recipeModelViewModel = ViewModelProviders.of(this).get(RecipeModelViewModel.class);
         recipeModelViewModel.getNewList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
@@ -175,8 +163,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observeFav(){
-        favouritesViewModel = ViewModelProviders.of(this).get(FavouritesViewModel.class);
-        favouritesViewModel.getFavList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        recipeModelViewModel.getFavList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);
@@ -185,8 +172,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observerFirstCategory(){
-        firstCategoryViewModel = ViewModelProviders.of(this).get(FirstCategoryViewModel.class);
-        firstCategoryViewModel.getmFirstCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        recipeModelViewModel.getFirstCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);
@@ -194,8 +180,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
         });
     }
     private void observeSecondCategory(){
-        secondCategoryViewModel = ViewModelProviders.of(this).get(SecondCategoryViewModel.class);
-        secondCategoryViewModel.getmSecondCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        recipeModelViewModel.getSecondCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);
@@ -204,8 +189,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observerThirdCategory(){
-        thirdCategoryViewModel = ViewModelProviders.of(this).get(ThirdCategoryViewModel.class);
-        thirdCategoryViewModel.getmThirdCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        recipeModelViewModel.getThirdCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);
@@ -214,8 +198,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observeForthCategory(){
-        forthCategoryViewModel = ViewModelProviders.of(this).get(ForthCategoryViewModel.class);
-        forthCategoryViewModel.getmForthCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        recipeModelViewModel.getForthCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);

@@ -32,7 +32,7 @@
                 android:icon="@drawable/food"/>
             <item
                 android:id="@+id/forthCategory"
-                android:title="Third Category"
+                android:title="Forth Category"
             android:icon="@drawable/food"/>
 
         </menu>

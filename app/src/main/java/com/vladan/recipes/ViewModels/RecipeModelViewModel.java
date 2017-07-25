@@ -14,7 +14,12 @@ import java.util.List;
 public class RecipeModelViewModel extends AndroidViewModel {
 
     private AppDatabase appDatabase;
-    private LiveData<List<RecipeModel>> mNewList;
+    private LiveData<List<RecipeModel>> newList;
+    private LiveData<List<RecipeModel >> favList;
+    private LiveData<List<RecipeModel >> firstCategoryList;
+    private LiveData<List<RecipeModel >> secondCategoryList;
+    private LiveData<List<RecipeModel>> thirdCategoryList;
+    private LiveData<List<RecipeModel>> forthCategoryList;
 
 
     //const
@@ -22,14 +27,63 @@ public class RecipeModelViewModel extends AndroidViewModel {
         super(application);
 
         appDatabase = AppDatabase.getInstance(this.getApplication());
-        mNewList = appDatabase.getRecipeModelDao().getNewRecipes();
 
     }
 
 
     //getting list of new items
     public LiveData<List<RecipeModel>> getNewList(){
-        return mNewList;
+        if(newList==null) {
+            newList = appDatabase.getRecipeModelDao().getNewRecipes();
+            return newList;
+        }
+        return newList;
+    }
+
+    //getting list of fav items
+    public LiveData<List<RecipeModel>> getFavList() {
+        if(favList == null) {
+            favList = appDatabase.getRecipeModelDao().getFavouriteRecipes();
+            return  favList;
+        }
+        return favList;
+    }
+
+    //getting recipes from first category
+    public LiveData<List<RecipeModel>> getFirstCategoryList() {
+        if(firstCategoryList == null) {
+            firstCategoryList = appDatabase.getRecipeModelDao().getRecipeByCategory(1);
+            return firstCategoryList;
+        }
+        return firstCategoryList;
+    }
+
+
+    //getting recipes from second category
+    public LiveData<List<RecipeModel>> getSecondCategoryList() {
+        if(secondCategoryList == null) {
+            secondCategoryList = appDatabase.getRecipeModelDao().getRecipeByCategory(2);
+            return  secondCategoryList;
+        }
+        return secondCategoryList;
+    }
+
+    //getting recipes from third category
+    public LiveData<List<RecipeModel>> getThirdCategoryList() {
+        if( thirdCategoryList == null) {
+            thirdCategoryList = appDatabase.getRecipeModelDao().getRecipeByCategory(3);
+            return  thirdCategoryList;
+        }
+        return thirdCategoryList;
+    }
+
+    //getting recipes from forth category
+    public LiveData<List<RecipeModel>> getForthCategoryList() {
+        if(forthCategoryList == null) {
+            forthCategoryList = appDatabase.getRecipeModelDao().getRecipeByCategory(4);
+            return  forthCategoryList;
+        }
+        return forthCategoryList;
     }
 
     //adding inital data into db
@@ -45,7 +99,7 @@ public class RecipeModelViewModel extends AndroidViewModel {
     private class AddListOfRecipes extends AsyncTask<List<RecipeModel>, Void, Void>{
         AppDatabase db;
 
-        protected AddListOfRecipes(AppDatabase db) {
+        private AddListOfRecipes(AppDatabase db) {
             this.db = db;
         }
 
@@ -59,7 +113,7 @@ public class RecipeModelViewModel extends AndroidViewModel {
     private static class AddSingleAsyncTask extends AsyncTask<RecipeModel, Void, Void>{
         AppDatabase db;
 
-        protected AddSingleAsyncTask(AppDatabase db) {
+        private AddSingleAsyncTask(AppDatabase db) {
             this.db = db;
         }
 
