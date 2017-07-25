@@ -1,6 +1,7 @@
 package com.vladan.recipes.db.dao;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -16,6 +17,10 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
 @Dao
 public interface RecipeModelDao {
+
+
+    @Query("select * from RecipeModel where recipeId = :id")
+    RecipeModel getRecipeModel(int id);
 
     //return new recipes
     @Query("select * from RecipeModel where recipeNew =" +1)

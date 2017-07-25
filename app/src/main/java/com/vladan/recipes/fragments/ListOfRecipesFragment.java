@@ -104,7 +104,8 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     @Override
     public void onItemClicked(int index) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("recipe", mAdapter.getListOfRecipes().get(index));
+        bundle.putInt("recipe", mAdapter.getListOfRecipes().get(index).getRecipeId());
+        bundle.putString("name", mAdapter.getListOfRecipes().get(index).getRecipeName());
         Intent i = new Intent(getActivity(), DetailRecipeActivity.class);
         i.putExtras(bundle);
         startActivity(i);
