@@ -70,7 +70,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
         return mRootView;
     }
 
-
+        //init recycler
     public void setRecyclerView(){
         mLayoutManager = new GridLayoutManager(getActivity(),2);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler);
@@ -122,7 +122,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
     private void initData(){
 
-        recipeModelViewModel = ViewModelProviders.of(this).get(RecipeModelViewModel.class);
+        recipeModelViewModel = ViewModelProviders.of(getActivity()).get(RecipeModelViewModel.class);
 
         switch(fragment){
             case NEW_RECIPES:

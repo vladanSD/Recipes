@@ -104,7 +104,7 @@ public class DetailRecipeFragment extends LifecycleFragment {
         // fab starting look
         if(favourites == 1) mFab.setImageResource(R.drawable.ic_menu_favorite_checked);
 
-        mTextView.setText(tekst);
+//        mTextView.setText(tekst);
 
     }
 

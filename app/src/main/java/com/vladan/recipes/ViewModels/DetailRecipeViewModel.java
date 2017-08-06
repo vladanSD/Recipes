@@ -2,7 +2,6 @@ package com.vladan.recipes.ViewModels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
@@ -23,25 +22,24 @@ public class DetailRecipeViewModel extends AndroidViewModel {
         appDatabase = AppDatabase.getInstance(this.getApplication());
     }
 
+
+    //getting recipe
     public MutableLiveData<RecipeModel> getRecipeModel(int id) {
         mRecipeModel = new MutableLiveData<>();
-        loadRecipe(id);
+        new getRecipeModelAsyncTask(appDatabase).execute(id);
         return mRecipeModel;
     }
 
-    private void loadRecipe(int id) {
-        new getRecipeModelAsyncTask(appDatabase).execute(id);
-    }
 
-    private void setmRecipeModel(RecipeModel recipeModel) {
-        mRecipeModel.setValue(recipeModel);
-    }
 
+    // add or remove from favourite section
     public void setFavourite(RecipeModel recipeModel){
         new UpdateAsyncTask(appDatabase).execute(recipeModel);
     }
 
 
+
+    //async - updating favourite status
     private class UpdateAsyncTask extends AsyncTask<RecipeModel, Void, Void>{
         AppDatabase db;
 
@@ -56,6 +54,8 @@ public class DetailRecipeViewModel extends AndroidViewModel {
         }
     }
 
+
+    //async for getting single recipe
     private  class  getRecipeModelAsyncTask extends AsyncTask<Integer, Void, RecipeModel>{
 
         AppDatabase db;
@@ -73,7 +73,7 @@ public class DetailRecipeViewModel extends AndroidViewModel {
         @Override
         protected void onPostExecute(RecipeModel recipeModel) {
             super.onPostExecute(recipeModel);
-            setmRecipeModel(recipeModel);
+            mRecipeModel.setValue(recipeModel);
         }
     }
 
