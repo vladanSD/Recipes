@@ -13,6 +13,9 @@ public class DetailRecipeViewModel extends AndroidViewModel {
 
     private AppDatabase appDatabase;
     private MutableLiveData<RecipeModel> mRecipeModel;
+    private AsyncTask mAsyncTask;
+
+    private boolean running = true;
 
 
 
@@ -26,7 +29,7 @@ public class DetailRecipeViewModel extends AndroidViewModel {
     //getting recipe
     public MutableLiveData<RecipeModel> getRecipeModel(int id) {
         mRecipeModel = new MutableLiveData<>();
-        new getRecipeModelAsyncTask(appDatabase).execute(id);
+        mAsyncTask = new getRecipeModelAsyncTask(appDatabase).execute(id);
         return mRecipeModel;
     }
 
@@ -49,6 +52,7 @@ public class DetailRecipeViewModel extends AndroidViewModel {
 
         @Override
         protected Void doInBackground(RecipeModel... params) {
+
             db.getRecipeModelDao().updateRecipe(params[0]);
             return null;
         }
@@ -66,8 +70,11 @@ public class DetailRecipeViewModel extends AndroidViewModel {
 
         @Override
         protected RecipeModel doInBackground(Integer... params) {
-           return db.getRecipeModelDao().getRecipeModel(params[0]);
 
+           while (running) {
+               return db.getRecipeModelDao().getRecipeModel(params[0]);
+           }
+           return  null;
         }
 
         @Override
@@ -75,8 +82,17 @@ public class DetailRecipeViewModel extends AndroidViewModel {
             super.onPostExecute(recipeModel);
             mRecipeModel.setValue(recipeModel);
         }
+
+        @Override
+        protected void onCancelled() {
+            running = false;
+        }
     }
 
 
-
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mAsyncTask.cancel(true);
+    }
 }
