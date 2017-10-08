@@ -1,5 +1,6 @@
 package com.vladan.recipes.activities;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,23 +8,33 @@ import android.view.View;
 import android.widget.Button;
 
 import com.vladan.recipes.R;
+import com.vladan.recipes.RecipesDemoApplication;
 import com.vladan.recipes.ViewModels.RecipeModelViewModel;
 import com.vladan.recipes.db.model.RecipeModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class AddDataActivity extends AppCompatActivity {
     RecipeModelViewModel viewModel;
     List<RecipeModel> mList = new ArrayList<>();
     Button button;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_data);
 
-        viewModel = ViewModelProviders.of(this).get(RecipeModelViewModel.class);
+        ((RecipesDemoApplication) this.getApplication())
+                .getApplicationComponent()
+                .inject(this);
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipeModelViewModel.class);
 
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {

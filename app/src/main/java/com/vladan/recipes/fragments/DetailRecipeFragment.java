@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vladan.recipes.R;
+import com.vladan.recipes.RecipesDemoApplication;
 import com.vladan.recipes.ViewModels.DetailRecipeViewModel;
 import com.vladan.recipes.activities.DetailRecipeActivity;
 import com.vladan.recipes.db.model.RecipeModel;
@@ -58,6 +59,10 @@ public class DetailRecipeFragment extends LifecycleFragment {
         super.onCreate(savedInstanceState);
 
         mId = getArguments().getInt(RECIPE_ID, 0);
+
+        ((RecipesDemoApplication) getActivity().getApplication())
+                .getApplicationComponent()
+                .inject(this);
     }
 
     @Override

@@ -9,15 +9,17 @@ import com.vladan.recipes.db.model.RecipeModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class RecipeModelViewModel extends ViewModel {
 
     private RecipeRepository repository;
 
-    AsyncTask mTask;
+    private AsyncTask mTask;
 
     //const
-    public RecipeModelViewModel(RecipeRepository repository) {
+    protected RecipeModelViewModel(RecipeRepository repository) {
             this.repository = repository;
     }
 
@@ -36,8 +38,7 @@ public class RecipeModelViewModel extends ViewModel {
 
     //adding inital data into db
     public void addData(List<RecipeModel> list){
-        mTask = new AddListOfRecipes();
-        mTask.execute(list);
+        mTask = new AddListOfRecipes().execute(list);
     }
 
 
@@ -55,7 +56,6 @@ public class RecipeModelViewModel extends ViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        mTask.cancel(true);
         mTask = null;
         repository = null;
     }

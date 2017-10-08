@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vladan.recipes.R;
+import com.vladan.recipes.RecipesDemoApplication;
 import com.vladan.recipes.ViewModels.RecipeModelViewModel;
 import com.vladan.recipes.activities.DetailRecipeActivity;
 import com.vladan.recipes.adapters.RecipeAdapter;
@@ -65,6 +66,10 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
         super.onCreate(savedInstanceState);
         //setting version of fragment
         fragment = getArguments().getInt("int_args", 0);
+
+        ((RecipesDemoApplication) getActivity().getApplication())
+                .getApplicationComponent()
+                .inject(this);
     }
 
     @Nullable

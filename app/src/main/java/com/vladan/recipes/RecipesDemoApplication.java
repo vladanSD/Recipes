@@ -25,4 +25,8 @@ public class RecipesDemoApplication extends Application{
                 .roomModule(new RoomModule(this))
                 .build();
     }
+
+    public ApplicationComponent getApplicationComponent() {
+        return applicationComponent;
+    }
 }

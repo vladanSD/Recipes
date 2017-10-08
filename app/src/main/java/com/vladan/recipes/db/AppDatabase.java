@@ -10,7 +10,7 @@ import com.vladan.recipes.db.model.RecipeModel;
 
 
 
-@Database(entities = {RecipeModel.class}, version = 1)
+@Database(entities = {RecipeModel.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract RecipeModelDao getRecipeModelDao();
