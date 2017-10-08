@@ -3,6 +3,7 @@ package com.vladan.recipes.fragments;
 
 import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,8 @@ import com.vladan.recipes.ViewModels.DetailRecipeViewModel;
 import com.vladan.recipes.activities.DetailRecipeActivity;
 import com.vladan.recipes.db.model.RecipeModel;
 
+import javax.inject.Inject;
+
 
 public class DetailRecipeFragment extends LifecycleFragment {
 
@@ -36,6 +39,9 @@ public class DetailRecipeFragment extends LifecycleFragment {
     private TextView mTextView;
     private int mId;
     private Toolbar mToolbar;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
 
     public static DetailRecipeFragment newInstance(int i) {
@@ -63,7 +69,6 @@ public class DetailRecipeFragment extends LifecycleFragment {
         mFab = (FloatingActionButton) mRootView.findViewById(R.id.fab_scrolling);
         mToolbar = (Toolbar) mRootView.findViewById(R.id.toolbar_scroll);
         mTextView = (TextView) mRootView.findViewById(R.id.tv_detail_content) ;
-        observeRecipeModel();
         return mRootView;
     }
 
@@ -77,11 +82,7 @@ public class DetailRecipeFragment extends LifecycleFragment {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-
-
-
-
-
+        observeRecipeModel();
 
     }
 
@@ -109,7 +110,7 @@ public class DetailRecipeFragment extends LifecycleFragment {
     }
 
     private void observeRecipeModel(){
-        viewModel = ViewModelProviders.of(this).get(DetailRecipeViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailRecipeViewModel.class);
 
 
         viewModel.getRecipeModel(mId).observe(DetailRecipeFragment.this, new Observer<RecipeModel>() {

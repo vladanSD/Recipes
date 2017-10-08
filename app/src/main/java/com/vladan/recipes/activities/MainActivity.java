@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i("State", "restored");
             activeFragment = (ListOfRecipesFragment) getSupportFragmentManager().getFragment(savedInstanceState, ACTIVE_FRAGMENT);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
-        } else {
+        }
+        else {
             Log.i("State", "no state found, initialaling fragment");
             navigationView.getMenu().getItem(0).setChecked(true);
             activeFragment = ListOfRecipesFragment.newInstance(0);

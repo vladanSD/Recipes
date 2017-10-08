@@ -2,6 +2,7 @@ package com.vladan.recipes.fragments;
 
 import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.vladan.recipes.utils.ItemTouchHelperCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 
 
 public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAdapter.OnClickedAndSwipedInterface {
@@ -44,6 +46,9 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecipeModelViewModel recipeModelViewModel;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
 
     public static ListOfRecipesFragment newInstance(int i) {
@@ -122,7 +127,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
 
     private void initData(){
 
-        recipeModelViewModel = ViewModelProviders.of(getActivity()).get(RecipeModelViewModel.class);
+        recipeModelViewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipeModelViewModel.class);
 
         switch(fragment){
             case NEW_RECIPES:
@@ -135,19 +140,19 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
                 getActivity().setTitle("Favourites");
                 break;
             case FIRST_CATEGORY:
-                observerFirstCategory();
+                observeCategory(1);
                 getActivity().setTitle("First category");
                 break;
             case SECOND_CATEGORY:
-                observeSecondCategory();
+                observeCategory(2);
                 getActivity().setTitle("Second category");
                 break;
             case THIRD_CATEGORY:
-                observerThirdCategory();
+                observeCategory(3);
                 getActivity().setTitle("Third category");
                 break;
             case FORTH_CATEGORY:
-                observeForthCategory();
+                observeCategory(4);
                 getActivity().setTitle("Forth category");
                 break;
 
@@ -172,16 +177,8 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
         });
     }
 
-    private void observerFirstCategory(){
-        recipeModelViewModel.getFirstCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
-            @Override
-            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
-                mAdapter.setListOfRecipes(recipeModels);
-            }
-        });
-    }
-    private void observeSecondCategory(){
-        recipeModelViewModel.getSecondCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+    private void observeCategory(int category){
+        recipeModelViewModel.getCategoryList(category).observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);
@@ -189,23 +186,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
         });
     }
 
-    private void observerThirdCategory(){
-        recipeModelViewModel.getThirdCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
-            @Override
-            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
-                mAdapter.setListOfRecipes(recipeModels);
-            }
-        });
-    }
 
-    private void observeForthCategory(){
-        recipeModelViewModel.getForthCategoryList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
-            @Override
-            public void onChanged(@Nullable List<RecipeModel> recipeModels) {
-                mAdapter.setListOfRecipes(recipeModels);
-            }
-        });
-    }
 
     public void swipeSetupAnimation(){
         ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(mAdapter);

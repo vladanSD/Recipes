@@ -1,59 +1,51 @@
 package com.vladan.recipes.ViewModels;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
-import com.vladan.recipes.db.AppDatabase;
+import com.vladan.recipes.db.RecipeRepository;
 import com.vladan.recipes.db.model.RecipeModel;
 
 
-public class DetailRecipeViewModel extends AndroidViewModel {
+public class DetailRecipeViewModel extends ViewModel {
 
-    private AppDatabase appDatabase;
+    private RecipeRepository repository;
+
     private MutableLiveData<RecipeModel> mRecipeModel;
-    private AsyncTask mAsyncTask;
 
+    private AsyncTask mTask;
     private boolean running = true;
 
 
 
-    public DetailRecipeViewModel(Application application) {
-        super(application);
-
-        appDatabase = AppDatabase.getInstance(this.getApplication());
+    public DetailRecipeViewModel(RecipeRepository repository) {
+        this.repository = repository;
     }
 
 
     //getting recipe
     public MutableLiveData<RecipeModel> getRecipeModel(int id) {
         mRecipeModel = new MutableLiveData<>();
-        mAsyncTask = new getRecipeModelAsyncTask(appDatabase).execute(id);
+        mTask = new getRecipeModelAsyncTask().execute(id);
         return mRecipeModel;
     }
 
 
-
     // add or remove from favourite section
     public void setFavourite(RecipeModel recipeModel){
-        new UpdateAsyncTask(appDatabase).execute(recipeModel);
+        new UpdateAsyncTask().execute(recipeModel);
     }
 
 
 
     //async - updating favourite status
     private class UpdateAsyncTask extends AsyncTask<RecipeModel, Void, Void>{
-        AppDatabase db;
-
-        private UpdateAsyncTask(AppDatabase db) {
-            this.db = db;
-        }
 
         @Override
         protected Void doInBackground(RecipeModel... params) {
 
-            db.getRecipeModelDao().updateRecipe(params[0]);
+            repository.updateRecipe(params[0]);
             return null;
         }
     }
@@ -62,17 +54,11 @@ public class DetailRecipeViewModel extends AndroidViewModel {
     //async for getting single recipe
     private  class  getRecipeModelAsyncTask extends AsyncTask<Integer, Void, RecipeModel>{
 
-        AppDatabase db;
-
-        private getRecipeModelAsyncTask(AppDatabase db) {
-            this.db = db;
-        }
-
         @Override
         protected RecipeModel doInBackground(Integer... params) {
 
            while (running) {
-               return db.getRecipeModelDao().getRecipeModel(params[0]);
+               return repository.getRecipeModel(params[0]);
            }
            return  null;
         }
@@ -93,6 +79,8 @@ public class DetailRecipeViewModel extends AndroidViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mAsyncTask.cancel(true);
+
+        mTask.cancel(true);
+        mTask = null;
     }
 }
