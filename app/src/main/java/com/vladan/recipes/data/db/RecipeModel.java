@@ -1,4 +1,4 @@
-package com.vladan.recipes.db.model;
+package com.vladan.recipes.data.db;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

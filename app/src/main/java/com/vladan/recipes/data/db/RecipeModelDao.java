@@ -1,14 +1,10 @@
-package com.vladan.recipes.db.dao;
+package com.vladan.recipes.data.db;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
-
-import com.vladan.recipes.db.model.RecipeModel;
 
 import java.util.List;
 
@@ -23,11 +19,11 @@ public interface RecipeModelDao {
     RecipeModel getRecipeModel(int id);
 
     //return new recipes
-    @Query("select * from RecipeModel where recipeNew =" +1)
+    @Query("select * from RecipeModel where recipeNew = 1")
     LiveData<List<RecipeModel>> getNewRecipes();
 
     //return fav recipes
-    @Query("select * from RecipeModel where favouriteRecipes=" +1)
+    @Query("select * from RecipeModel where favouriteRecipes= 1")
     LiveData<List<RecipeModel>> getFavouriteRecipes();
 
     //return recipes by category

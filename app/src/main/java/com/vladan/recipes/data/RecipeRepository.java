@@ -1,9 +1,9 @@
-package com.vladan.recipes.db;
+package com.vladan.recipes.data;
 
 import android.arch.lifecycle.LiveData;
 
-import com.vladan.recipes.db.dao.RecipeModelDao;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.data.db.RecipeModelDao;
+import com.vladan.recipes.data.db.RecipeModel;
 
 import java.util.List;
 

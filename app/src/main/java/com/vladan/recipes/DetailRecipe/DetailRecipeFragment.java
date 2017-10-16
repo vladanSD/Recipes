@@ -1,4 +1,4 @@
-package com.vladan.recipes.fragments;
+package com.vladan.recipes.DetailRecipe;
 
 
 import android.arch.lifecycle.LifecycleFragment;
@@ -8,10 +8,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +19,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.vladan.recipes.R;
 import com.vladan.recipes.RecipesDemoApplication;
-import com.vladan.recipes.ViewModels.DetailRecipeViewModel;
-import com.vladan.recipes.activities.DetailRecipeActivity;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.data.db.RecipeModel;
 
 import javax.inject.Inject;
 

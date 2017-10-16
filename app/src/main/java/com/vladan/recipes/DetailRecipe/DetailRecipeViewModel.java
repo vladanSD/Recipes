@@ -1,11 +1,11 @@
-package com.vladan.recipes.ViewModels;
+package com.vladan.recipes.DetailRecipe;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
-import com.vladan.recipes.db.RecipeRepository;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.data.RecipeRepository;
+import com.vladan.recipes.data.db.RecipeModel;
 
 
 public class DetailRecipeViewModel extends ViewModel {

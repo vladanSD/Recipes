@@ -5,9 +5,9 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
 import com.vladan.recipes.ViewModels.CustomViewModelFactory;
-import com.vladan.recipes.db.AppDatabase;
-import com.vladan.recipes.db.RecipeRepository;
-import com.vladan.recipes.db.dao.RecipeModelDao;
+import com.vladan.recipes.data.db.AppDatabase;
+import com.vladan.recipes.data.RecipeRepository;
+import com.vladan.recipes.data.db.RecipeModelDao;
 
 import javax.inject.Singleton;
 
@@ -44,7 +44,7 @@ public class RoomModule {
 
     @Provides
     @Singleton
-    AppDatabase provideAppDatabase(Application application){
+    AppDatabase provideAppDatabase(){
         return database;
     }
 

@@ -1,11 +1,9 @@
-package com.vladan.recipes.activities;
+package com.vladan.recipes.DetailRecipe;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.vladan.recipes.R;
-import com.vladan.recipes.ViewModels.DetailRecipeViewModel;
-import com.vladan.recipes.fragments.DetailRecipeFragment;
 
 public class DetailRecipeActivity extends AppCompatActivity {
 

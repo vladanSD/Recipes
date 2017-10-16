@@ -1,4 +1,4 @@
-package com.vladan.recipes.fragments;
+package com.vladan.recipes.Collections;
 
 import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
@@ -17,10 +17,8 @@ import android.view.ViewGroup;
 
 import com.vladan.recipes.R;
 import com.vladan.recipes.RecipesDemoApplication;
-import com.vladan.recipes.ViewModels.RecipeModelViewModel;
-import com.vladan.recipes.activities.DetailRecipeActivity;
-import com.vladan.recipes.adapters.RecipeAdapter;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.DetailRecipe.DetailRecipeActivity;
+import com.vladan.recipes.data.db.RecipeModel;
 import com.vladan.recipes.utils.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAdapter.OnClickedAndSwipedInterface {
+public class CollectionFragment extends LifecycleFragment implements CollectionAdapter.OnClickedAndSwipedInterface {
 
     //version of fragment
     private int fragment = -1;
@@ -43,20 +41,20 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     private static final String STATE = "key";
 
     private View mRootView;
-    private RecipeAdapter mAdapter;
+    private CollectionAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RecipeModelViewModel recipeModelViewModel;
+    private CollectionViewModel collectionViewModel;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
 
-    public static ListOfRecipesFragment newInstance(int i) {
+    public static CollectionFragment newInstance(int i) {
 
         Bundle args = new Bundle();
         args.putInt("int_args", i);
-        ListOfRecipesFragment fragment = new ListOfRecipesFragment();
+        CollectionFragment fragment = new CollectionFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -84,7 +82,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     public void setRecyclerView(){
         mLayoutManager = new GridLayoutManager(getActivity(),2);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler);
-        mAdapter = new RecipeAdapter(new ArrayList<RecipeModel>(), getContext(), this);
+        mAdapter = new CollectionAdapter(new ArrayList<RecipeModel>(), getContext(), this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -125,14 +123,14 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     public void onSwiped(int index) {
 //        RecipeModel recipe = mAdapter.getListOfRecipes().get(index);
 //        recipe.setFavouriteRecipes(0);
-//        recipeModelViewModel.removeFromFavourites(recipe);
+//        collectionViewModel.removeFromFavourites(recipe);
     }
 
 
 
     private void initData(){
 
-        recipeModelViewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipeModelViewModel.class);
+        collectionViewModel = ViewModelProviders.of(this, viewModelFactory).get(CollectionViewModel.class);
 
         switch(fragment){
             case NEW_RECIPES:
@@ -165,7 +163,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observeNew(){
-        recipeModelViewModel.getNewList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        collectionViewModel.getNewList().observe(CollectionFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                     mAdapter.setListOfRecipes(recipeModels);
@@ -174,7 +172,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observeFav(){
-        recipeModelViewModel.getFavList().observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        collectionViewModel.getFavList().observe(CollectionFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);
@@ -183,7 +181,7 @@ public class ListOfRecipesFragment extends LifecycleFragment implements RecipeAd
     }
 
     private void observeCategory(int category){
-        recipeModelViewModel.getCategoryList(category).observe(ListOfRecipesFragment.this, new Observer<List<RecipeModel>>() {
+        collectionViewModel.getCategoryList(category).observe(CollectionFragment.this, new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable List<RecipeModel> recipeModels) {
                 mAdapter.setListOfRecipes(recipeModels);

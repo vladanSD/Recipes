@@ -1,4 +1,4 @@
-package com.vladan.recipes.activities;
+package com.vladan.recipes.Collections;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,16 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.vladan.recipes.R;
-import com.vladan.recipes.fragments.ListOfRecipesFragment;
+import com.vladan.recipes.AddDataActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class CollectionActivity extends AppCompatActivity {
 
     private static final String ACTIVE_FRAGMENT = "active";
 
     Toolbar mToolbar;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
-    ListOfRecipesFragment activeFragment;
+    CollectionFragment activeFragment;
 
 
     @Override
@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
         //restoring fragment instance
         if(savedInstanceState != null ){
             Log.i("State", "restored");
-            activeFragment = (ListOfRecipesFragment) getSupportFragmentManager().getFragment(savedInstanceState, ACTIVE_FRAGMENT);
+            activeFragment = (CollectionFragment) getSupportFragmentManager().getFragment(savedInstanceState, ACTIVE_FRAGMENT);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
         }
         else {
             Log.i("State", "no state found, initialaling fragment");
             navigationView.getMenu().getItem(0).setChecked(true);
-            activeFragment = ListOfRecipesFragment.newInstance(0);
+            activeFragment = CollectionFragment.newInstance(0);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
         }
     }
@@ -70,37 +70,37 @@ public class MainActivity extends AppCompatActivity {
                 switch (id){
                     case R.id.new_recipes:
                         mDrawerLayout.closeDrawers();
-                        activeFragment = ListOfRecipesFragment.newInstance(0);
+                        activeFragment = CollectionFragment.newInstance(0);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.favourite_recipes:
                         mDrawerLayout.closeDrawers();
-                        activeFragment = ListOfRecipesFragment.newInstance(1);
+                        activeFragment = CollectionFragment.newInstance(1);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.firstCategory:
                         mDrawerLayout.closeDrawers();
-                        activeFragment = ListOfRecipesFragment.newInstance(11);
+                        activeFragment = CollectionFragment.newInstance(11);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.secondCategory:
                         mDrawerLayout.closeDrawers();
-                        activeFragment = ListOfRecipesFragment.newInstance(12);
+                        activeFragment = CollectionFragment.newInstance(12);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.thirdCategory:
                         mDrawerLayout.closeDrawers();
-                        activeFragment = ListOfRecipesFragment.newInstance(13);
+                        activeFragment = CollectionFragment.newInstance(13);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.forthCategory:
                         mDrawerLayout.closeDrawers();
-                        activeFragment = ListOfRecipesFragment.newInstance(14);
+                        activeFragment = CollectionFragment.newInstance(14);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fl_fragment, activeFragment).commit();
                         break;
                     case R.id.init_data:
                         mDrawerLayout.closeDrawers();
-                        startActivity(new Intent(MainActivity.this, AddDataActivity.class));
+                        startActivity(new Intent(CollectionActivity.this, AddDataActivity.class));
                         break;
 
                 }

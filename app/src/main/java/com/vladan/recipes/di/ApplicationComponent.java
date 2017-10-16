@@ -2,9 +2,9 @@ package com.vladan.recipes.di;
 
 import android.app.Application;
 
-import com.vladan.recipes.activities.AddDataActivity;
-import com.vladan.recipes.fragments.DetailRecipeFragment;
-import com.vladan.recipes.fragments.ListOfRecipesFragment;
+import com.vladan.recipes.AddDataActivity;
+import com.vladan.recipes.DetailRecipe.DetailRecipeFragment;
+import com.vladan.recipes.Collections.CollectionFragment;
 
 import javax.inject.Singleton;
 
@@ -17,9 +17,9 @@ import dagger.Component;
 @Component (modules = {ApplicationModule.class, RoomModule.class})
 public interface ApplicationComponent {
 
-    void inject(ListOfRecipesFragment listOfRecipesFragment);
+    void inject(CollectionFragment collectionFragment);
     void inject(DetailRecipeFragment detailRecipeFragment);
     void inject(AddDataActivity addDataActivity);
 
-    Application application();
+    Application getApplication();
 }

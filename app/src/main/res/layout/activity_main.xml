@@ -6,7 +6,7 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vladan.recipes.activities.MainActivity">
+    tools:context="com.vladan.recipes.Collections.CollectionActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

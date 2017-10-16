@@ -1,4 +1,4 @@
-package com.vladan.recipes.activities;
+package com.vladan.recipes;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.vladan.recipes.R;
-import com.vladan.recipes.RecipesDemoApplication;
-import com.vladan.recipes.ViewModels.RecipeModelViewModel;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.Collections.CollectionViewModel;
+import com.vladan.recipes.data.db.RecipeModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class AddDataActivity extends AppCompatActivity {
-    RecipeModelViewModel viewModel;
+    CollectionViewModel viewModel;
     List<RecipeModel> mList = new ArrayList<>();
     Button button;
 
@@ -34,7 +32,7 @@ public class AddDataActivity extends AppCompatActivity {
                 .getApplicationComponent()
                 .inject(this);
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(RecipeModelViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(CollectionViewModel.class);
 
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {

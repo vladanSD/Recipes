@@ -1,25 +1,23 @@
-package com.vladan.recipes.ViewModels;
+package com.vladan.recipes.Collections;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
-import com.vladan.recipes.db.RecipeRepository;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.data.RecipeRepository;
+import com.vladan.recipes.data.db.RecipeModel;
 
 import java.util.List;
 
-import javax.inject.Inject;
 
-
-public class RecipeModelViewModel extends ViewModel {
+public class CollectionViewModel extends ViewModel {
 
     private RecipeRepository repository;
 
     private AsyncTask mTask;
 
     //const
-    protected RecipeModelViewModel(RecipeRepository repository) {
+    public CollectionViewModel(RecipeRepository repository) {
             this.repository = repository;
     }
 

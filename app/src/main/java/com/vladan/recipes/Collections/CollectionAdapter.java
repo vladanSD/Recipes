@@ -1,4 +1,4 @@
-package com.vladan.recipes.adapters;
+package com.vladan.recipes.Collections;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,20 +10,20 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vladan.recipes.R;
-import com.vladan.recipes.db.model.RecipeModel;
+import com.vladan.recipes.data.db.RecipeModel;
 import com.vladan.recipes.utils.OnSwipedListener;
 
 import java.util.List;
 
 
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> implements OnSwipedListener{
+public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> implements OnSwipedListener{
 
     private List<RecipeModel> listOfRecipes;
     private Context context;
     private OnClickedAndSwipedInterface listener;
 
-    public RecipeAdapter(List<RecipeModel> listOfRecipes, Context context, OnClickedAndSwipedInterface listener ) {
+    public CollectionAdapter(List<RecipeModel> listOfRecipes, Context context, OnClickedAndSwipedInterface listener ) {
         this.listOfRecipes = listOfRecipes;
         this.context = context;
         this.listener = listener;
@@ -53,13 +53,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
 
     @Override
-    public RecipeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CollectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item,parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecipeAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CollectionAdapter.ViewHolder holder, int position) {
             final RecipeModel recipe =listOfRecipes.get(position);
 
             //binding data

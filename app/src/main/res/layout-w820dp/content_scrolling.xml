@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:behavior_overlapTop="96dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.vladan.recipes.activities.DetailRecipeActivity"
+    tools:context="com.vladan.recipes.DetailRecipe.DetailRecipeActivity"
     tools:showIn="@layout/activity_detail_recipe">
 
     <android.support.v7.widget.CardView

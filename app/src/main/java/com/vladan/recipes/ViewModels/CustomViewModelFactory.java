@@ -3,7 +3,9 @@ package com.vladan.recipes.ViewModels;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.vladan.recipes.db.RecipeRepository;
+import com.vladan.recipes.Collections.CollectionViewModel;
+import com.vladan.recipes.DetailRecipe.DetailRecipeViewModel;
+import com.vladan.recipes.data.RecipeRepository;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,8 +26,8 @@ public class CustomViewModelFactory implements ViewModelProvider.Factory{
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
-        if(modelClass.isAssignableFrom(RecipeModelViewModel.class))
-            return (T) new RecipeModelViewModel(repository);
+        if(modelClass.isAssignableFrom(CollectionViewModel.class))
+            return (T) new CollectionViewModel(repository);
         else if(modelClass.isAssignableFrom(DetailRecipeViewModel.class))
             return (T) new DetailRecipeViewModel(repository);
         else {

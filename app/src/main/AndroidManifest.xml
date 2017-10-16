@@ -14,15 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".Collections.CollectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AddDataActivity" />
-        <activity android:name=".activities.DetailRecipeActivity"></activity>
+        <activity android:name=".AddDataActivity" />
+        <activity android:name=".DetailRecipe.DetailRecipeActivity"></activity>
     </application>
 
 </manifest>
